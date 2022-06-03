@@ -1,0 +1,16 @@
+
+dag_id: 'Simple_Bash'
+schedule_interval: "'@daily'"
+do_catchup: False
+do_depend_on_past: False
+notification_email: sample@airflow.com
+send_email_on_failure: True
+send_email_on_retry: True
+num_of_retries: 1
+time_delta: 3
+
+task_1_id: 'task_1'
+task_1_command: 'echo at task 1'
+
+task_2_id: 'task_1'
+task_2_command: 'echo at task 2'

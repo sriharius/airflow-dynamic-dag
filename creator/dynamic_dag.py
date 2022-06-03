@@ -11,18 +11,18 @@ class DagCreator:
         template_dir = os.path.dirname(os.path.abspath(template_file_path))
         template_file_name = os.path.basename(os.path.abspath(template_file_path))
 
-        print(template_dir)
-        print(template_file_name)
-
         env = Environment(loader=FileSystemLoader(template_dir))
         ref_template = env.get_template(template_file_name)
 
         with open(config_file_path, 'r') as config_file_ref:
             yaml_config = yaml.safe_load(config_file_ref)
-            dag_file_name = f"dag_{yaml_config['dag_id']}".lower()
+            dag_file_path = os.path.join(dag_home, f"dag_{yaml_config['dag_id']}.py".lower())
 
-            with open(f"{dag_home}/{dag_file_name}.py", 'w') as dag_file_ref:
+            print(f'Generating DAG file for {template_file_path} and {config_file_path} at {dag_home}')
+
+            with open(dag_file_path, 'w') as dag_file_ref:
                 dag_file_ref.write(ref_template.render(yaml_config))
+                print(f'DAG file {dag_file_path} is generated successfully')
 
 
 if __name__ == '__main__':

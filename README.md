@@ -11,5 +11,13 @@ Why create individual DAG files rather than creating DAG objects at runtime? Wel
 # Key Features
 Coming Soon...
 
+# Usage
+- Clone the project
+- Checkout `alpha` branch
+- Go to root directory `airflow-dynamic-dag`
+- Run `python creator/dynamic_dag.py`
+
+If the code runs successfully, there will be a dag file created with name `dag_simple_bash.py`
+
 # Want To Contribute?
 Please send an email to udugani@gmail.com

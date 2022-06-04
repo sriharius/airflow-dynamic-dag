@@ -1,7 +1,11 @@
-
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+
+def dummy_python_callable(**kwargs):
+    print('File Path - ', kwargs['file_path'])
+
 
 with DAG(
     dag_id="{{ dag_id }}",
@@ -23,9 +27,10 @@ with DAG(
         bash_command="{{ task_1_command }}"
     )
 
-    t2 = BashOperator(
+    t2 = PythonOperator(
         task_id = "{{ task_2_id }}",
-        bash_command="{{ task_2_command }}"
+        python_callable=dummy_python_callable,
+        op_kwargs={ 'file_path': "{{ file_path }}" }
     )
 
 t1 >> t2

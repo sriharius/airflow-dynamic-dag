@@ -3,11 +3,20 @@ from jinja2 import Environment, FileSystemLoader
 import yaml
 import os
 
+from validate_variables import VariableValidator
+
 
 class DagCreator:
 
     @staticmethod
     def create(template_file_path, config_file_path, dag_home):
+        # check the variables in template file and YAML config keys for a match
+        validator = VariableValidator(template_file_path, config_file_path)
+        if not validator.validate():
+            print("Template variables are not matching with YAML configuration")
+            print(f"DAG file generation for {template_file_path} and {config_file_path} failed")
+            return
+
         template_dir = os.path.dirname(os.path.abspath(template_file_path))
         template_file_name = os.path.basename(os.path.abspath(template_file_path))
 

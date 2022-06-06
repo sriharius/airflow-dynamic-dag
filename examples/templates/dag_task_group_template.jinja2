@@ -1,0 +1,39 @@
+
+from airflow import DAG
+from datetime import datetime, timedelta
+from airflow.operators.dummy import DummyOperator
+from airflow.utils.task_group import TaskGroup
+
+with DAG(
+    dag_id="{{ dag_id }}",
+    schedule_interval={{ schedule_interval }},
+    start_date=datetime(2022, 1, 1),
+    catchup={{ do_catchup }},
+    tags={{ tags or None }},
+    default_args={
+        'depends_on_past': {{ do_depend_on_past }},
+        'email': "{{ notification_email }}",
+        'email_on_failure': {{ send_email_on_failure }},
+        'email_on_retry': {{ send_email_on_retry }},
+        'retries': {{ num_of_retries }},
+        'retry_delay': timedelta(minutes={{ time_delta }})
+    }
+) as dag:
+    t0 = DummyOperator(
+        task_id = "{{ task_0_id }}",
+    )
+
+    with TaskGroup(group_id='Dummy_Group') as grp1:
+        t1 = DummyOperator(
+            task_id = "{{ task_1_id }}",
+        )
+
+        t2 = DummyOperator(
+            task_id = "{{ task_2_id }}",
+        )
+
+    t3 = DummyOperator(
+        task_id = "{{ task_3_id }}",
+    )
+
+t0 >> grp1 >> t3

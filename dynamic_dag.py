@@ -33,7 +33,7 @@ class MultipleDynamicDagCreator(AbstractDynamicDagCreator):
             for key in content.keys():
                 template_file = content[key]['template_file']
                 config_file = content[key]['config_file']
-                print(template_file, config_file)
+                
                 creator = DagCreator(template_file, config_file, self.creator_args['dag_home'])
                 creator.create()
 

@@ -6,7 +6,7 @@ from creator.dag_creator import DagCreator
 
 
 class AbstractDynamicDagCreator:
-
+    """ Abstract class to implement different ways of creation - single or multiple DAGs """
     def __init__(self, args: dict):
         self.creator_args = args
 
@@ -39,7 +39,7 @@ class MultipleDynamicDagCreator(AbstractDynamicDagCreator):
 
 
 class DynamicDagFactory():
-
+    """ Factory class to create the relevant DAG creators """
     @staticmethod
     def get_dag_creator(args: dict) -> AbstractDynamicDagCreator:
         if args['cmd'] == 'single':

@@ -5,7 +5,12 @@ import yaml
 
 
 class VariableValidator:
-
+    """ Validating configuration parameters between the YAML and the template files. 
+        template_path: str
+            absolute path to the template file
+        config_path: str
+            absolution path to the YAML configuration file
+    """
     def __init__(self, template_path, config_path):
         self.template_file = template_path
         self.config_file = config_path

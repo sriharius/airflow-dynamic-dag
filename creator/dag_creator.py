@@ -7,7 +7,14 @@ from creator.validate_variables import VariableValidator
 
 
 class DagCreator:
-
+    """ Class to crate the static DAG file based on the template and YAML configuration file
+        template_file: str
+            absolute path to the template file
+        config_file: str
+            absolute path to the YAML configuration file
+        dag_home: str
+            absolute path to the directory where the DAG file should be created
+    """
     def __init__(self, template_file, config_file, dag_home):
         self.template_file_path = template_file
         self.config_file_path = config_file

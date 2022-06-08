@@ -1,0 +1,8 @@
+
+simple_bash:
+  template_file: '/Users/srihari/workspace/python/airflow-dynamic-dag/examples/templates/dag_bash_template.jinja2'
+  config_file: '/Users/srihari/workspace/python/airflow-dynamic-dag/examples/configs/dag_bash_config.yml'
+
+simple_python:
+  template_file: '/Users/srihari/workspace/python/airflow-dynamic-dag/examples/templates/dag_python_template.jinja2'
+  config_file: '/Users/srihari/workspace/python/airflow-dynamic-dag/examples/configs/dag_python_config.yml'

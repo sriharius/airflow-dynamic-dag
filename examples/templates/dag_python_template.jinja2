@@ -1,0 +1,31 @@
+
+# Auto generated DAG file
+
+from airflow import DAG
+from datetime import datetime, timedelta
+from airflow.operators.python import PythonOperator
+
+def dummy_python_callable(**kwargs):
+    print('File Path - ', kwargs['file_path'])
+
+
+with DAG(
+    dag_id="{{ dag_id }}",
+    schedule_interval={{ schedule_interval }},
+    start_date=datetime(2022, 1, 1),
+    catchup={{ do_catchup }},
+    tags={{ tags or None }},
+    default_args={
+        'depends_on_past': {{ do_depend_on_past }},
+        'email': "{{ notification_email }}",
+        'email_on_failure': {{ send_email_on_failure }},
+        'email_on_retry': {{ send_email_on_retry }},
+        'retries': {{ num_of_retries }},
+        'retry_delay': timedelta(minutes={{ time_delta }})
+    }
+) as dag:
+    t1 = PythonOperator(
+        task_id = "{{ task_1_id }}",
+        python_callable=dummy_python_callable,
+        op_kwargs={ 'file_path': "{{ file_path }}" }
+    )

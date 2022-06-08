@@ -22,8 +22,16 @@ class DagCreator:
 
     def create(self):
         # check the variables in template file and YAML config keys for a match
-        validator = VariableValidator(self.template_file_path, self.config_file_path)
-        if not validator.validate():
+        is_validate_success = False
+
+        try:
+            validator = VariableValidator(self.template_file_path, self.config_file_path)
+            is_validate_success = validator.validate()
+        except Exception as ex:
+            print(ex)
+            return
+
+        if not is_validate_success:
             print("Template variables are not matching with YAML configuration")
             print(f"DAG file generation for {self.template_file_path} and {self.config_file_path} failed")
             return

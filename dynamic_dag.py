@@ -11,7 +11,7 @@ class AbstractDynamicDagCreator:
         self.creator_args = args
 
     def create(self):
-        pass
+        raise NotImplementedError("AbstractDynamicDagCreator is an abstract class, cannot be instantiated")
 
 
 class SingleDynamicDagCreator(AbstractDynamicDagCreator):
